@@ -16,7 +16,7 @@ The starter project has some HTML and CSS styling to display a static version of
 ## Load game
 
 - Clone the website from https://github.com/kchan167/memory-game
-
+- Or you can go to https://kchan167.github.io/memory-game/
 ## How to play this game
 This games consist of 16 random cards in a 4x4 grid.
 - Flip a card and reveal its symbol.
