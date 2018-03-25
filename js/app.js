@@ -64,11 +64,17 @@ var addEventListener = function() {
         }
         else {
             if(openCard === openedCardList[0]) {
-                $('.deck').find('.open').addClass('match');
+                $('.deck').find('.open').addClass('match animated infinite bounceIn');
+                setTimeout(function() {
+                    $('.deck').find('.open').removeClass('open show animated');
+                }, 600);
                 matchCards = matchCards + 1;
             }
             else {
-                $('.deck').find('.open').removeClass('open show');
+                $('.deck').find('.open').addClass('unmatch animated flipOutX');
+                setTimeout(function () {
+                    $('.deck').find('.open').removeClass('open show unmatch flipOutX');
+                }, 600);
             }
             openedCardList = [];
             moves = moves + 1;
