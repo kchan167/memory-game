@@ -35,28 +35,33 @@ function shuffle(array) {
     return array;
 }
 
-// Initiatize Game
+// Initiatize function
 function initGame() {
+    // Initiatize counters
     matchCards = 0;
     moves = 0;
     document.querySelector('.moves').innerHTML = moves;
     resetStar();
+    // Shuffle Deck
     var cards = shuffle(list);
     $('.deck').empty();
     for(var i = 0; i < cards.length; i ++) {
         $('.deck').append($('<li class = "card"><i class="fa fa-' + cards[i] + '"></i></li>'));
     }
+    // Add click function
     addEventListener();
+    // Reset timer
     cancelTimer();
     startTimer();
 }
 
-// End Game
+// endGame function()
 function endGame(moves,score) {
-    // Display rating
+    // End Game
     swal({
         icon: 'success',
 		title: 'You Won',
+        // Display rating
 		text: 'Rating: ' + score + ' Stars\n Total: ' + moves + ' Moves',
 		button: 'Play again',
         closeOnEsc: false,
@@ -64,44 +69,51 @@ function endGame(moves,score) {
 	}).then(
         function (isConfirm) {
 		if (isConfirm) {
-			initGame();
+			initGame(); // Initiatize the game
 		}
 	});
 }
 
+// Start timer function
 var startTimer = function() {
     timer = setInterval(function() {
     counter = counter + 1
     document.querySelector('.timer').innerHTML = counter;
-    }, 1000);
-};
+    }, 1000); // Update html's timer for each second
+}
 
+// Reset timer function
 var cancelTimer = function() {
     clearInterval(timer);
-    counter = 0;
-    document.querySelector('.timer').innerHTML = counter;
-};
+    counter = 0; // Reset counter
+    document.querySelector('.timer').innerHTML = counter; // Reset html's timer
+}
 
-// Calculate rating by moves
+// calRating() function
 function calRating(moves) {
+    // Calculate rating by moves
     var rating = 3;
     if(moves >= threeStar && moves < twoStar) {
+        // Show two stars
         $('.fa-star').eq(2).removeClass('fa-star').addClass('no-star');
         rating = 2;
     }
     else if (moves >= twoStar && moves < oneStar) {
+        // Show 1 star
         $('.fa-star').eq(1).removeClass('fa-star').addClass('no-star');
         rating = 1;
     }
     else if (moves > oneStar) {
+        // Show 0 star
         $('.fa-star').eq(0).removeClass('fa-star').addClass('no-star');
         rating = 0;
     }
     return rating;
 }
 
-// Reset Star on the scoreboard
+// Reset rating function
 function resetStar() {
+    // Reset Star on the scoreboard
     $('.no-star').removeClass('no-star').addClass('fa-star');
 }
 
@@ -116,12 +128,12 @@ function resetStar() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// Event listenre for restart game
+// Event listener function for restart game
 $(".restart").click(function() {
-            initGame();
+            initGame(); // Initiatize the game
      });
 
-// Event listener for a card.
+// Event listener for cards.
 var addEventListener = function() {
     var openCard;
     var animationCompelete = true;
@@ -129,39 +141,43 @@ var addEventListener = function() {
         // Get the class of current clicked card
         openCard = $(this).find("i").attr("class");
         // Flip Card
-        // Prevent shown cards being clicked again
         if(animationCompelete === true) {
-            $(this).addClass('open show');
-            // Compare Cards
+            // animationCompelete used to check if animation queue
+            // It prevents shown cards being clicked again
+            $(this).addClass('open show'); // display the card
             if(openedCardList.length === 0) {
-                openedCardList.push(openCard);
+                openedCardList.push(openCard); // Add clicked card to a list
             }
             else {
+                // Compare Cards
                 if(openCard === openedCardList[0]) {
-                    $('.deck').find('.open').addClass('match animated infinite bounceIn');
-                    animationCompelete = false;
+                    $('.deck').find('.open').addClass('match animated infinite bounceIn'); // Animated Card
+                    animationCompelete = false; // Start animation
                     setTimeout(function() {
-                        $('.deck').find('.open').removeClass('open show animated');
+                        $('.deck').find('.open').removeClass('open show animated'); // Stop animation;
                         animationCompelete = true;
                     }, 600);
-                    matchCards = matchCards + 1;
+                    matchCards = matchCards + 1; // Increment counter
                 }
                 else {
-                    $('.deck').find('.open').addClass('unmatch animated flipOutX');
-                    animationCompelete = false;
+                    $('.deck').find('.open').addClass('unmatch animated flipOutX'); // Animated Card
+                    animationCompelete = false; // Start animation
                     setTimeout(function () {
-                        $('.deck').find('.open').removeClass('open show unmatch flipOutX');
+                        $('.deck').find('.open').removeClass('open show unmatch flipOutX'); // Stop animation
                         animationCompelete = true;
                     }, 600);
                 }
-                openedCardList = [];
-                moves = moves + 1;
-                document.querySelector('.moves').innerHTML = moves;
-                var score = calRating(moves);
+                openedCardList = []; // Reset list
+                moves = moves + 1; // Increment moves counter
+                document.querySelector('.moves').innerHTML = moves; // Update moves on the webpage
+                var score = calRating(moves); // Update rating
+                // End Game
                 if(matchCards === (list.length / 2)) {
+                    // Stop timer
                     time = counter;
                     cancelTimer();
                     document.querySelector('.timer').innerHTML = time;
+                    // Pop out a dialog to show the result
                     setTimeout(function() {
                         endGame(moves, score);
                     }, 700);
@@ -171,4 +187,4 @@ var addEventListener = function() {
     });
 }
 
-initGame();
+initGame(); // Start the program
