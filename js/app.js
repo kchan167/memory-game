@@ -54,6 +54,10 @@ function initGame() {
 var addEventListener = function() {
     var openCard;
     $(".card").click(function() {
+        // Prevent shown cards been clicked again
+        if ($(this).hasClass('open') || $(this).hasClass('match')) {
+            return true;
+        }
         // Get the class of current clicked card
         openCard = $(this).find("i").attr("class");
         // Flip Card
