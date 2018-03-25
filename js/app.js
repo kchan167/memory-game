@@ -34,7 +34,8 @@ function initGame() {
     $('.deck').empty();
     for(var i = 0; i < cards.length; i ++) {
         $('.deck').append($('<li class = "card"><i class="fa fa-' + cards[i] + '"></i></li>'));
-    }
+    };
+    addEventListener();
 };
 
 /*
@@ -47,3 +48,30 @@ function initGame() {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+// Event listener for a card.
+var addEventListener = function() {
+    var openCard;
+    $(".card").click(function() {
+        // Get the class of current clicked card
+        openCard = $(this).find("i").attr("class");
+        // Flip Card
+        $(this).addClass('open show');
+        // Compare Cards
+        if(openedCardList.length === 0) {
+            console.log(openCard);
+            openedCardList.push(openCard);
+        }
+        else {
+            if(openCard === openedCardList[0]) {
+                $('.deck').find('.open').addClass('match');
+            }
+            else {
+                $('.deck').find('.open').removeClass('open show');
+            }
+            openedCardList = [];
+        }
+    });
+};
+
+initGame();
