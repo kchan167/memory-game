@@ -111,3 +111,15 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.swal-overlay {
+  background-color: rgba(43, 165, 137, 0.45);
+}
+
+.swal-button {
+    background-color: #02ccba;
+}
+
+.swal-text {
+    font-size: 20px;
+}

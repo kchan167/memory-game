@@ -46,6 +46,25 @@ function initGame() {
     addEventListener();
 };
 
+// End Game
+function endGame(moves,score) {
+    // Display rating
+    swal({
+        icon: 'success',
+		title: 'You Won',
+		text: 'Rating: ' + score + ' Stars\n Total: ' + moves + ' Moves',
+		button: 'Play again',
+        closeOnEsc: false,
+        allowOutsideClick: false,
+	}).then(
+        function (isConfirm) {
+		if (isConfirm) {
+			initGame();
+		}
+	});
+};
+
+// Calculate rating by moves
 function calRating(moves) {
     var rating = 3;
     if(moves >= threeStar && moves < twoStar) {
@@ -63,6 +82,7 @@ function calRating(moves) {
     return rating;
 };
 
+// Reset Star on the scoreboard
 function resetStar() {
     $('.no-star').removeClass('no-star').addClass('fa-star');
 }
@@ -119,7 +139,12 @@ var addEventListener = function() {
                 openedCardList = [];
                 moves = moves + 1;
                 document.querySelector('.moves').innerHTML = moves;
-                calRating(moves);
+                var score = calRating(moves);
+                if(matchCards === (list.length / 2)) {
+                    setTimeout(function() {
+                        endGame(moves, score);
+                    }, 700);
+                }
             }
         }
     });
