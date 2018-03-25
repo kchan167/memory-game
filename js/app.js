@@ -34,6 +34,10 @@ function shuffle(array) {
 
 // Initiatize Game
 function initGame() {
+    matchCards = 0;
+    moves = 0;
+    document.querySelector('.moves').innerHTML = moves;
+    resetStar();
     var cards = shuffle(list);
     $('.deck').empty();
     for(var i = 0; i < cards.length; i ++) {
