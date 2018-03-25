@@ -1,11 +1,12 @@
 /*
  * Create a list that holds all of your cards
  */
- let list = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor',
+let list = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor',
 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb',
-'diamond', 'diamond'],
-    openedCardList = [];
-
+'diamond', 'diamond'];
+let openedCardList = [];
+var moves = 0;
+var matchCards = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -64,11 +65,14 @@ var addEventListener = function() {
         else {
             if(openCard === openedCardList[0]) {
                 $('.deck').find('.open').addClass('match');
+                matchCards = matchCards + 1;
             }
             else {
                 $('.deck').find('.open').removeClass('open show');
             }
             openedCardList = [];
+            moves = moves + 1;
+            document.querySelector('.moves').innerHTML = moves;
         }
     });
 };
