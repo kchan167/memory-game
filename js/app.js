@@ -5,6 +5,9 @@ let list = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor',
 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb',
 'diamond', 'diamond'];
 let openedCardList = [];
+let oneStar = 30;
+let twoStar = 20;
+let threeStar = 10;
 var moves = 0;
 var matchCards = 0;
 /*
@@ -39,6 +42,27 @@ function initGame() {
     addEventListener();
 };
 
+function calRating(moves) {
+    var rating = 3;
+    if(moves >= threeStar && moves < twoStar) {
+        $('.fa-star').eq(2).removeClass('fa-star').addClass('no-star');
+        rating = 2;
+    }
+    else if (moves >= twoStar && moves < oneStar) {
+        $('.fa-star').eq(1).removeClass('fa-star').addClass('no-star');
+        rating = 1;
+    }
+    else if (moves > oneStar) {
+        $('.fa-star').eq(0).removeClass('fa-star').addClass('no-star');
+        rating = 0;
+    }
+    return rating;
+};
+
+function resetStar() {
+    $('.no-star').removeClass('no-star').addClass('fa-star');
+}
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -54,7 +78,7 @@ function initGame() {
 var addEventListener = function() {
     var openCard;
     $(".card").click(function() {
-        // Prevent shown cards been clicked again
+        // Prevent shown cards being clicked again
         if ($(this).hasClass('open') || $(this).hasClass('match')) {
             return true;
         }
@@ -83,6 +107,7 @@ var addEventListener = function() {
             openedCardList = [];
             moves = moves + 1;
             document.querySelector('.moves').innerHTML = moves;
+            calRating(moves);
         }
     });
 };
