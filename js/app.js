@@ -59,7 +59,6 @@ var addEventListener = function() {
         $(this).addClass('open show');
         // Compare Cards
         if(openedCardList.length === 0) {
-            console.log(openCard);
             openedCardList.push(openCard);
         }
         else {
