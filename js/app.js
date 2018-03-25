@@ -28,6 +28,14 @@ function shuffle(array) {
     return array;
 }
 
+// Initiatize Game
+function initGame() {
+    var cards = shuffle(list);
+    $('.deck').empty();
+    for(var i = 0; i < cards.length; i ++) {
+        $('.deck').append($('<li class = "card"><i class="fa fa-' + cards[i] + '"></i></li>'));
+    }
+};
 
 /*
  * set up the event listener for a card. If a card is clicked:
