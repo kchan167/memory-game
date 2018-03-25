@@ -10,6 +10,9 @@ let twoStar = 20;
 let threeStar = 10;
 var moves = 0;
 var matchCards = 0;
+var timer;
+var time;
+var counter = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -42,9 +45,11 @@ function initGame() {
     $('.deck').empty();
     for(var i = 0; i < cards.length; i ++) {
         $('.deck').append($('<li class = "card"><i class="fa fa-' + cards[i] + '"></i></li>'));
-    };
+    }
     addEventListener();
-};
+    cancelTimer();
+    startTimer();
+}
 
 // End Game
 function endGame(moves,score) {
@@ -62,6 +67,19 @@ function endGame(moves,score) {
 			initGame();
 		}
 	});
+}
+
+var startTimer = function() {
+    timer = setInterval(function() {
+    counter = counter + 1
+    document.querySelector('.timer').innerHTML = counter;
+    }, 1000);
+};
+
+var cancelTimer = function() {
+    clearInterval(timer);
+    counter = 0;
+    document.querySelector('.timer').innerHTML = counter;
 };
 
 // Calculate rating by moves
@@ -80,7 +98,7 @@ function calRating(moves) {
         rating = 0;
     }
     return rating;
-};
+}
 
 // Reset Star on the scoreboard
 function resetStar() {
@@ -141,6 +159,9 @@ var addEventListener = function() {
                 document.querySelector('.moves').innerHTML = moves;
                 var score = calRating(moves);
                 if(matchCards === (list.length / 2)) {
+                    time = counter;
+                    cancelTimer();
+                    document.querySelector('.timer').innerHTML = time;
                     setTimeout(function() {
                         endGame(moves, score);
                     }, 700);
@@ -148,6 +169,6 @@ var addEventListener = function() {
             }
         }
     });
-};
+}
 
 initGame();
