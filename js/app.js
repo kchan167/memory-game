@@ -86,37 +86,41 @@ $(".restart").click(function() {
 // Event listener for a card.
 var addEventListener = function() {
     var openCard;
+    var animationCompelete = true;
     $(".card").click(function() {
-        // Prevent shown cards being clicked again
-        if ($(this).hasClass('open') || $(this).hasClass('match')) {
-            return true;
-        }
         // Get the class of current clicked card
         openCard = $(this).find("i").attr("class");
         // Flip Card
-        $(this).addClass('open show');
-        // Compare Cards
-        if(openedCardList.length === 0) {
-            openedCardList.push(openCard);
-        }
-        else {
-            if(openCard === openedCardList[0]) {
-                $('.deck').find('.open').addClass('match animated infinite bounceIn');
-                setTimeout(function() {
-                    $('.deck').find('.open').removeClass('open show animated');
-                }, 600);
-                matchCards = matchCards + 1;
+        // Prevent shown cards being clicked again
+        if(animationCompelete === true) {
+            $(this).addClass('open show');
+            // Compare Cards
+            if(openedCardList.length === 0) {
+                openedCardList.push(openCard);
             }
             else {
-                $('.deck').find('.open').addClass('unmatch animated flipOutX');
-                setTimeout(function () {
-                    $('.deck').find('.open').removeClass('open show unmatch flipOutX');
-                }, 600);
+                if(openCard === openedCardList[0]) {
+                    $('.deck').find('.open').addClass('match animated infinite bounceIn');
+                    animationCompelete = false;
+                    setTimeout(function() {
+                        $('.deck').find('.open').removeClass('open show animated');
+                        animationCompelete = true;
+                    }, 600);
+                    matchCards = matchCards + 1;
+                }
+                else {
+                    $('.deck').find('.open').addClass('unmatch animated flipOutX');
+                    animationCompelete = false;
+                    setTimeout(function () {
+                        $('.deck').find('.open').removeClass('open show unmatch flipOutX');
+                        animationCompelete = true;
+                    }, 600);
+                }
+                openedCardList = [];
+                moves = moves + 1;
+                document.querySelector('.moves').innerHTML = moves;
+                calRating(moves);
             }
-            openedCardList = [];
-            moves = moves + 1;
-            document.querySelector('.moves').innerHTML = moves;
-            calRating(moves);
         }
     });
 };
