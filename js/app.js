@@ -5,7 +5,6 @@ let list = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor',
 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb',
 'diamond', 'diamond'];
 let openedCardList = [];
-let oneStar = 30;
 let twoStar = 20;
 let threeStar = 10;
 var moves = 0;
@@ -99,15 +98,10 @@ function calRating(moves) {
         $('.fa-star').eq(2).removeClass('fa-star').addClass('no-star');
         rating = 2;
     }
-    else if (moves >= twoStar && moves < oneStar) {
+    else if (moves >= twoStar && moves > twoStar) {
         // Show 1 star
         $('.fa-star').eq(1).removeClass('fa-star').addClass('no-star');
         rating = 1;
-    }
-    else if (moves > oneStar) {
-        // Show 0 star
-        $('.fa-star').eq(0).removeClass('fa-star').addClass('no-star');
-        rating = 0;
     }
     return rating;
 }
