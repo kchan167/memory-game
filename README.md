@@ -10,10 +10,12 @@
 
 ## Updates
 ### 3/27/2018
+- a5ca6b7 feat: Cards are now added to webpage dynamically
 - 8aa3f92 feat: Timer now starts after user clicks a card
 - 8396d48 feat: The lowest score is now 1 star
 - f2d6685 feat: Add time in the congratulation scoreboard
 - 5873dee fix: Add code to prevent user click the same card
+
 
 ## Instructions
 
