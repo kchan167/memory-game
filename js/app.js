@@ -99,7 +99,7 @@ function calRating(moves) {
         $('.fa-star').eq(2).removeClass('fa-star').addClass('no-star');
         rating = 2;
     }
-    else if (moves >= twoStar && moves > twoStar) {
+    else if (moves >= twoStar && moves >= twoStar) {
         // Show 1 star
         $('.fa-star').eq(1).removeClass('fa-star').addClass('no-star');
         rating = 1;
