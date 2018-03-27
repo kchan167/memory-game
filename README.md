@@ -6,6 +6,14 @@
 * [Load game](#load-game)
 * [How to play this game](#how-to-play-this-game)
 * [Features & Resources](#features-and-resources)
+* [Updates](#updates)
+
+## Updates
+### 3/27/2018
+- 8aa3f92 feat: Timer now starts after user clicks a card
+- 8396d48 feat: The lowest score is now 1 star
+- f2d6685 feat: Add time in the congratulation scoreboard
+- 5873dee fix: Add code to prevent user click the same card
 
 ## Instructions
 
@@ -30,8 +38,7 @@ This games consist of 16 random cards in a 4x4 grid.
 Score is displayed as star and calculated by the numbers of moves.
 - 3 stars: Less than 10 moves
 - 2 stars: Less than 20 moves
-- 1 star: Less than 30 moves
-- 0 star: More than 30 moves
+- 1 star: More than 20 moves
 
 #### Aimation counter
 In order to freeze the event handler, a counter is applied into this program.
