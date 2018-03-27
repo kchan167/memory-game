@@ -12,6 +12,7 @@ var matchCards = 0;
 var timer;
 var time;
 var counter = 0;
+var clicked = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -37,6 +38,7 @@ function shuffle(array) {
 // Initiatize function
 function initGame() {
     // Initiatize counters
+    clicked = 0;
     matchCards = 0;
     moves = 0;
     document.querySelector('.moves').innerHTML = moves;
@@ -51,7 +53,6 @@ function initGame() {
     addEventListener();
     // Reset timer
     cancelTimer();
-    startTimer();
 }
 
 // endGame function()
@@ -133,6 +134,11 @@ var addEventListener = function() {
     var openCard;
     var animationCompelete = true;
     $(".card").click(function() {
+        // Start Timer
+        if(clicked === 0) {
+            startTimer();
+            clicked += 1;
+        }
         // Prevent clicking the same card
         if($(this).hasClass('show') || $(this).hasClass('match')) {
             return true;
