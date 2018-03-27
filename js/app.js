@@ -62,7 +62,8 @@ function endGame(moves,score) {
         icon: 'success',
 		title: 'You Won',
         // Display rating
-		text: 'Rating: ' + score + ' Stars\n Total: ' + moves + ' Moves',
+		text: 'Rating: ' + score + ' Stars\n Total: ' + moves + ' Moves'
+            + ' within ' + time + ' sec',
 		button: 'Play again',
         closeOnEsc: false,
         allowOutsideClick: false,
