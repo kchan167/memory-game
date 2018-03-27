@@ -138,6 +138,10 @@ var addEventListener = function() {
     var openCard;
     var animationCompelete = true;
     $(".card").click(function() {
+        // Prevent clicking the same card
+        if($(this).hasClass('show') || $(this).hasClass('match')) {
+            return true;
+        }
         // Get the class of current clicked card
         openCard = $(this).find("i").attr("class");
         // Flip Card
